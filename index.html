@@ -36,6 +36,10 @@
                     <p><a href="http://nodeknockout.com">Node Knockout 2011</a>, held between August 27 and 29, was a programming competition in which teams of developers were charged with designing, building, and launching a web app in a single weekend. The only basic requirements were that 1) each entry must use node.js, a javascript-based web server, and 2) that all designing, coding, tweaking, and deploying be done in the 48 hour period allowed for the contest.</p>
                     <p>Our team, made up of four developers from Mahalo.com, had not competed in last year's Node Knockout, but we were excited and impressed by the entries we saw, and we decided we had to enter this time around. We tossed around a few concepts and eventually settled on the idea of <a class="eightbitbeatslink" href="http://eightbitbeats.com">eightbitbeats.com, a multi-user music sequencer built around an 8bit theme</a>. At 5pm pacific time August 27, we got cracking.</p>
                 </div>
+                <div class="grid_8">
+                    <p>But before we get into the nitty gritty, check out the finished product:</p>
+                    <iframe width="640" height="510" src="http://www.youtube.com/embed/QmtB9o4HBQU?hd=1" frameborder="0" allowfullscreen></iframe>
+                </div>
                 <div class="aside grid_4">
                     <div class="social_stuff">
                         <iframe class="vote-button" src="http://nodeknockout.com/iframe/somethingcoded" frameborder=0 scrolling=no allowtransparency=true width=115 height=25></iframe>
@@ -228,12 +232,12 @@
     // Pseudo javascript for demonstration
     Player.play = (function() {
         // Set up timing variables
-            var skipTicks = 60000 / 4,
-            nextTick = (new Date).getTime(); // 60000ms per min over 4ticks per beat
+            var skipTicks = 60000 / 4, // 60000ms per min over 4ticks per beat
+            nextTick = (new Date).getTime();
 
             return function() {
                 while ((new Date).getTime() > nextTick) {
-                    // While it’s time to tick, tick until it isn’t time anymore.
+                    // While it's time to tick, tick until it isn't time anymore.
 
                     // Do the work
                     $.each(Player.notes, function(note) {
@@ -262,7 +266,8 @@
             // Add a file if it’s not been added.
             addFile: function(file) {
                 if (!cache.file) {
-                    cache[file] = file;  // This value should probably just be set to true.
+                    cache[file] = file;
+                    // This value should probably just be set to true.
                 }
             },
 
@@ -298,7 +303,7 @@
                 <div class="grid_8">
                     <p>We were pretty beat by the time Sunday afternoon rolled around, but overall very pleased with the amount of work we were able to crank out. We should note one key habit we nailed down very early Saturday morning. We realized the Feature Creature can run rampant during events like this, with minds stuck in high gear and ideas flying every which way.  That's why the minute our feature list became more than a handful of items, we drew a thick line down the middle of the board and labeled the two sides "must have" and "nice to have".  Any time a new (or previously forgotten) feature was suggested, it went into one of the two buckets, and we were sticklers about adding any features to the "must have" section. Through this process, we made sure we wouldn't burn time on anything unless it truly fit into our notion of the minimum viable product. This saved us a ton of time (and headache), and we finished all the "must haves" on Sunday morning with time to spare, which gave us the opportunity to work on some fun, non-critical bits in the final hours.
                     </p>
-                    <p>At the time of this writing, all that remains is for judging and voting to finish on September 6th. We would be thrilled if you took the time to visit <a href="http://www.eightbitbeats.com">eightbitbeats.com</a> and play around with our creation. If you dig it and want to support us in the contest, you can head over to the Node Knockout site and <a href="http://nodeknockout.com/teams/somethingcoded">cast your vote</a> (it's a little tricky... make sure you click the heart after logging in with Facebook). Or if you don't dig it, leave a comment and let us know why! We'll be continue development once the competition is over, so we'd love to hear your feedback suggestions.</p>
+                    <p>At the time of this writing, all that remains is for judging and voting to finish on September 6th. We would be thrilled if you took the time to visit <a href="http://www.eightbitbeats.com">eightbitbeats.com</a> and play around with our creation. If you dig it and want to support us in the contest, you can head over to the Node Knockout site and <a href="http://nodeknockout.com/teams/somethingcoded">cast your vote</a> (it's a little tricky... make sure you click the heart after logging in with Facebook), or <a href="http://news.ycombinator.com/item?id=2955693">toss us an upvote on Hacker News</a>. Or if you don't dig it, leave a comment and let us know why! We'll be continue development once the competition is over, so we'd love to hear your feedback suggestions.</p>
                     <p>Thanks so much, and happy coding!</p>
                 </div>
                 <div class="aside grid_4">
