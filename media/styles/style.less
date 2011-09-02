@@ -2,7 +2,7 @@
 @fontSize: 16px;
 @fontColor: #555;
 @headingColor: #000;
-@red: rgb(175, 75, 60);
+@blue: rgb(24, 168, 243);
 @lineHeight: 1.5;
 
 // mixins
@@ -34,20 +34,17 @@ a { text-decoration: none; color: #000; border-bottom: 1px solid; }
 
 li { list-style-type: square; }
 
-pre { border-left: 5px solid @red; }
+pre { border-left: 5px solid @blue; }
 
 .editable { background: lighten(#3b6eae, 50%); }
 
 .main:after { .clear; }
 .main-header { margin-bottom: 50px; margin-top: 50px; }
 .download, .intro { margin-top: 52px; }
-.logo { 
-    .logo-type { color: @headingColor; font-family: 'Cabin Sketch'; font-size: 105px; display: block; text-shadow: 1px 1px 1px #fff; }
-    .tag-line { width: 750px; border: 1px solid darken(@red, 20%); display: block; margin: -39px 0 0 5px; letter-spacing: 1px; word-spacing: 4px; .gradient(@red, darken(@red, 4%)); padding: 0 10px; color: #fff; text-shadow: 1px 1px 2px rgba(0,0,0,.3); }
-}
+#logo { position: relative; left: -16px; }
 
 .note { font: italic bold 15px/1.5 georgia; margin-bottom: 15px; }
-.note:before { content: '* '; color: @red; font-size: 20px; }
+.note:before { content: '* '; color: @blue; font-size: 20px; }
 
 .section { margin-bottom: 50px; }
 
@@ -55,15 +52,15 @@ pre { border-left: 5px solid @red; }
 
 b, .bold { color: #333; }
 
-.download-link { background: @red url('images/download.png') no-repeat top left; padding: 15px 15px 15px 53px; .border-radius(5px); .gradient(lighten(@red, 10%), darken(@red, 10%); position: relative;
+.download-link { background: @blue url('images/download.png') no-repeat top left; padding: 15px 15px 15px 53px; .border-radius(5px); .gradient(lighten(@blue, 10%), darken(@blue, 10%); position: relative;
     color: #fff; font-size: 20px; text-shadow: 0 0 2px rgba(0,0,0,.5);
     a { border: none; }
-    border: 1px solid darken(@red, 20%);
+    border: 1px solid darken(@blue, 20%);
     .download-icon { background: url('images/download.png') no-repeat top left; position: absolute; top: 11px; left: 15px; width: 50px; height: 50px; display: block; }
 }
 
-.download-link:hover { .gradient(lighten(@red, 7%), darken(@red, 7%); }
-.download-link:active { .gradient(darken(@red, 5%), lighten(@red, 5%); position: relative; top: 1px; }
+.download-link:hover { .gradient(lighten(@blue, 7%), darken(@blue, 7%); }
+.download-link:active { .gradient(darken(@blue, 5%), lighten(@blue, 5%); position: relative; top: 1px; }
 
 .main-footer li { list-style-type: none; margin-left: 0; }
 

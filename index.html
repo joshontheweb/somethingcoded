@@ -21,8 +21,7 @@
         <div class="main">
             <div class="main-header container_12">
                 <div class="logo grid_12">
-                    <span class="logo-type">somethingCoded</span>
-                    <span class="tag-line">We almost went to Hooters instead</span>
+                    <img id="logo" src="media/styles/images/logo.png" alt="something coded" width="615" height="98" />
                 </div>
             </div>
 
@@ -82,11 +81,26 @@
                     <p>
                         In terms of visual design, the biggest challenge for eightbitbeats was making efficient use of space. Although available screen real estate gets larger every year, the standard width for a web page still tends to be around 960px, and our first mockups stuck to that standard. However, once we settled on a reasonable size for the sequence buttons (10x10) -- and started laying out additional elements like user avatars, instrument selection, and labels for each instrument's notes -- we realized we would need increase the width, and eventually settled at 1300px. We made a judgement call that, at least for the purposes of the Node Knockout, we could probably assume our audience would be using fairly new hardware with wide-format, high-res displays. (In the days since the code freeze, we've had lots of feedback but no comments regarding page width, so it seems we guessed right.)
                     </p>
+                    <img src="media/styles/images/ui-zoom.png" alt="ui-zoom" width="726" height="307" />
                     <p>
                         Next up, we needed to consider the sequencer matrix. We kept image assets to a minimum in favor of CSS3 to lighten the load, but even so we still had to contend with potentially hundreds of divs on screen at any time. Add to that the fact that each button needed several states including disabled, enabled, active, played, downbeat, measure downbeat, some of which would require nested divs, and we were quickly talking about thousands of elements. Rather than go down that road, we opted to use :before and :after pseudo classes to insert containers dynamically. (See [Nicolas Gallagher's excellent post ](http://nicolasgallagher.com/multiple-backgrounds-and-borders-with-css2) for details on this method). Using this approach simplified our markup considerably and allowed us, with the help of less.css, to handle all the assorted states in a legible stylesheet (less than 400 lines total).
                     </p>
+                    <pre><code>
+    .step {
+        float: left;
+        margin-right: 3px;
+
+        &.active .note {
+            border-color: rgba(255,255,255,.1);
+            box-shadow: 0 0 3px rgba(255,255,255,.1);
+        }
+        &.active .note.on:after {
+            background: rgba(253,154,0,1.0) !important;
+        }
+    }
+                    </code></pre>
                     <p>
-                        The design of the buttons was inspired by a fantastic gallery of control surfaces, mixers, and other pro audio gear at by livid instruments (http://www.flickr.com/photos/31245410@N07/). We were lucky to have lots of great reference material and a well-defined real-world paradigm to follow. From there, we just had to choose a color scheme and start coding.
+                        The design of the buttons was inspired by a fantastic gallery of control surfaces, mixers, and other pro audio gear at by <a href="http://www.flickr.com/photos/31245410@N07/">livid instruments</a>. We were lucky to have lots of great reference material and a well-defined real-world paradigm to follow. From there, we just had to choose a color scheme and start coding.
                     </p>
                 </div>
                 <div class="aside grid_4">
