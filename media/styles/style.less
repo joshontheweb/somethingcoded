@@ -27,17 +27,19 @@ body { font: normal normal 16px/1.5 sans-serif; color: @fontColor; /*background:
 h1, h2, h3, h4, h5, h6 { color: @headingColor; }
 
 h1 { .box-shadow(1px, 1px, 5px, .5); font-size: @fontSize*3; }
-h2 { font-size: @fontSize*2; border: 1px solid #ddd; display: inline-block; padding: 0 10px; .border-radius(3px); background: #fff; }
+h2 { color: @blue; font-size: @fontSize*2; display: inline-block; .border-radius(3px); background: #fff; }
 h3 { font-size: @fontSize*1.25; margin-bottom: 5px; }
 
 a { text-decoration: none; color: #000; border-bottom: 1px solid; }
 
 li { list-style-type: square; }
 
-pre { border-left: 5px solid @blue; }
+pre { border-left: 5px solid @blue; font-size: 14px; }
 
 .editable { background: lighten(#3b6eae, 50%); }
 
+.social_stuff { position: fixed; top: 210px; left: 80px; width: 150px; }
+.social_stuff #count { color: @blue; }
 .main:after { .clear; }
 .main-header { margin-bottom: 50px; margin-top: 50px; }
 .download, .intro { margin-top: 52px; }
@@ -65,3 +67,5 @@ b, .bold { color: #333; }
 .main-footer li { list-style-type: none; margin-left: 0; }
 
 .save-event { display: none; }
+
+.section img { display: block; max-width: 98%; padding: 1px; border: 1px solid #ccc; margin-bottom: 24px; }
