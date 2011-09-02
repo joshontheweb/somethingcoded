@@ -2,9 +2,9 @@
 <html>
     <head>
     <link rel="icon" href="/media/styles/images/favicon.ico" />
-    <title>Etch.js - A Content Editor</title>
-   	<meta name="description" content="A Content Editor built on backbone.js">
-	<meta name="author" content="Josh Nielsen"> 
+    <title>SomethingCoded</title>
+    <meta name="description" content="A Content Editor built on backbone.js">
+    <meta name="author" content="Josh Nielsen"> 
 
             <link rel="stylesheet" href="media/styles/reset.css" />
             <link rel="stylesheet" href="media/styles/text.css" />
@@ -131,7 +131,7 @@
                 Track models
                     Steps Collection
                         Step models
-                            notes: [0,1,0,0,1,0,0,0,0,0]	
+                            notes: [0,1,0,0,1,0,0,0,0,0]    
         ChatLog model
             Messages collection
                 Message models
@@ -171,6 +171,74 @@
                         When a user chats it adds a new Message to the Messages collection and sends that data throught the socket with 
                         the username.  This way we know which user to place the chat bubble in the other clients apps.
                     </p>
+                    <h2>The Game Loop</h2>
+                    <img src="media/styles/images/activenotes.png" alt="The Game Loop" />
+                    <p>
+                        We anticipated the main play loop to be one of the more challenging aspects of the project.  It had to be optimized since it would be responsible for playing collections of audio samples precisely enough to pass as music to sensitive human ears.  We began by looking to the internet for ideas for our implementation, and found this article on Javascript Game Loops by Arthur Schreiber (http://nokarma.org/2011/02/02/javascript-game-development-the-game-loop/index.html).  While the article covers some bits of screen rendering, it served as a solid starting point.
+                        The basic necessities of our play loop were that it to loop through each step in the sequence at a consistent rate determined by a set beats per minute (BPM) value and play every active note in that step.  This was easily achieved with the following:
+                    </p>
+                    <p>
+                        <pre><code>
+    // Pseudo javascript for demonstration
+    Player.play = (function() {
+        // Set up timing variables
+            var skipTicks = 60000 / 4,
+            nextTick = (new Date).getTime(); // 60000ms per min over 4ticks per beat
+
+            return function() {
+                while ((new Date).getTime() > nextTick) {
+                    // While it’s time to tick, tick until it isn’t time anymore.
+
+                    // Do the work
+                    $.each(Player.notes, function(note) {
+                        note.play();    
+                    });
+
+                    // Increments nextTick by the correct ms per tick
+                    nextTick += skipTicks / Player.bpm; 
+                }
+            };
+    })()
+
+    //Start the loop
+    Player.loopInterval = setInterval(Player.play, 0);
+                        </code></pre>
+                    </p>
+                    <p>
+                        However, we noticed that it did not perform very well with a reasonable amounts of notes, so we built a sound manager object to collect every sound that needed to play on a given step, and only play each unique sound once.  We achieved this by throwing every sound into a makeshift hashset (we used an associative array) and then triggering a play on each of those sounds at the end of the loop.  Then we had the idea for the manager to pre-cache the notes in the coming step ahead of time, so that they would be ready to play immediately upon each new time step.
+                    </p>
+                    <p><pre><code>
+    soundManager = (function () {
+        // Make-shift HashSets
+        var toPlay = {};  // Sounds to play for the current step.
+        var cache = {};  // Sounds to cache for the next step.
+        return {
+            // Add a file if it’s not been added.
+            addFile: function(file) {
+                if (!cache.file) {
+                    cache[file] = file;  // This value should probably just be set to true.
+                }
+            },
+
+            // Play the collected sounds.   
+            play: function() {
+                // Play sounds if we have them
+                if (!!_.size(toPlay)) {
+                    _.each(toPlay, function(name) {
+                        playSound(name);
+                    });
+                }
+
+                // Update the sets.
+                toPlay = $.extend({}, cache);
+                cache = {};
+            }
+        };
+    })();
+                        </code></pre></p>
+                        <p>
+                            This was as far as we got with the loop optimizations in the allotted 48 hours.  We would have liked to spend a bit more time tinkering with the loop, but it seems to be holding up with 4 to 5 users worth of notes.  By nature, sequencers are intimately bound with loops.  At the highest level, they contain the user-facing music loop, while further down they rely on precise “tick” timing loops.  Game loops were a relatively new topic to most of us.  We had fun learning about them and are excited to correct our mistakes in coming versions of the application.
+                            </p>
 
                 </div>
                 <div class="aside grid_4">
