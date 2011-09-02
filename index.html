@@ -90,9 +90,10 @@
                 </div>
                 <div class="grid_8">
                     <p>
-                        We decided to use <a href="http://documentcloud.github.com/backbone/">Backbone.js</a> for our front-end architecture.  It gave us just the right amount of tools to be really
-                        powerful while remaining super lightweight and flexible.  Two devs on our team had already built multiple backbone applications together and so it was a shoe-in.
-                        Our architecture looked something like this:
+                        Due to the time limit, it was obvious that we needed to use a frontend framework to move quickly and keep logic and presentation separate.  After zero deliberation we settled on <a href="http://documentcloud.github.com/backbone/">Backbone.js</a>.
+                        It gave us just the right amount of tools to be really powerful while remaining super lightweight and flexible.  Using backbone's collections allowed us to easily organize the elements of
+                        the player as well as index individual tracks, steps, and notes when it is time to play them.  In addition two devs on our team had already built multiple backbone applications together and
+                        so it was a prime choice for our frontend framework.  Our architecture looked something like this:
                     </p>
                     <p>
                         <pre><code>
@@ -100,6 +101,9 @@
 
     App model
         User model
+
+        Instruments collection
+            Instrument model
 
         Player model
             MegaMan collection
@@ -131,6 +135,11 @@
                     </p>
                         The <code>User</code> model just gets populated with the current users info and is referenced when permissions are calculated
                         or messages are sent.
+                    </p>
+                    <h3>Instruments</h3>
+                    </p>
+                        This is simply a collection of all the instruments you can choose from.  When ever you switch instruments it grabs the appropriate <code>Instrument</code>
+                        and mounts it on the <code>Track</code> model for reference when notes are played.
                     </p>
                     <h3>Player</h3>
                     <p>
