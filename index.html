@@ -99,8 +99,7 @@
                     <p>
                         Due to the time limit, it was obvious that we needed to use a frontend framework to move quickly and keep logic and presentation separate.  After zero deliberation we settled on <a href="http://documentcloud.github.com/backbone/">Backbone.js</a>.
                         It gave us just the right amount of tools to be really powerful while remaining super lightweight and flexible.  Using backbone's collections allowed us to easily organize the elements of
-                        the player as well as index individual tracks, steps, and notes when it is time to play them.  In addition two devs on our team had already built multiple backbone applications together and
-                        so it was a prime choice for our frontend framework.  Our architecture looked something like this:
+                        the player as well as index individual tracks, steps, and notes when it was time to play them.  In addition, two devs on our team had already built multiple backbone applications together, so it was a prime choice for our frontend framework.  Our architecture looked something like this:
                     </p>
                     <p>
                         <pre><code>
@@ -127,7 +126,7 @@
                         </pre></code>
                     </p>
                     <p class="note">
-                        Its not shown in this diagram but model each has a view associated with it to render its state into html.
+                        It's not shown in this diagram, but each model has a view associated with it to render its state into html.
                         View the <a href="http://eightbitbeats.com/media/scripts/script.js">source</a> of our page and you can see the full app unminified
                     </p>
 
@@ -135,15 +134,15 @@
                     
                     <h3>App</h3>
                     <p>
-                        At the top level we had an <code>App</code> model and the socket.io connection we will be
-                        communicating through.  The App is responsible for initializing the application and
-                        a good place to make references to app wide stuff like the <code>User</code>, <code>Player</code>, and <code>ChatLog</code> models.
+                        At the top level we have an <code>App</code> model and the socket.io connection we 
+                        communicate through.  The App is responsible for initializing the application and is
+                        a good place to make references to app-wide resources like the <code>User</code>, <code>Player</code>, and <code>ChatLog</code> models.
                         When the app starts it syncs state with the server and either creates itself based on data given,
-                        or if there are no other users at the time, it just renders itself into an empty player.
+                        or, if there are no other users at the time, just renders itself into an empty player.
                     <p>
                     <h3>User</h3>
                     </p>
-                        The <code>User</code> model just gets populated with the current users info and is referenced when permissions are calculated
+                        The <code>User</code> model just gets populated with the current user's info and is referenced when permissions are calculated
                         or messages are sent.
                     </p>
                     <h3>Instruments</h3>
@@ -154,18 +153,18 @@
                     <h3>Player</h3>
                     <p>
                         The Player contains most of the meat of the application.  It holds the Tracks and is used to store
-                        the state of the current iteration.  Essentially what happens is when the players step attribute is incremented
-                        by the game loop each Track and the MegaMen are listening and respond by rendering themselves into the new state.  Since the callbacks
+                        the state of the current iteration.  Essentially what happens is when the player's step attribute is incremented
+                        by the game loop, each the listening Tracks and the MegaMen respond by rendering themselves into the new state.  Since the callbacks
                         run asynchronously it makes it easy to keep all tracks and then Megaman in sync with eachother.
-                        In the case of the tracks, they are also told to loop over the specified steps notes and play the associated
+                        The tracks also told to loop over the specified step's notes and play the associated
                         sound files.
                     </p>
                     <p class="note">We will be doing a more technical follow up post that goes over the code involved in making the player work</p>
                     <h3>ChatLog</h3>
                     <p>
-                        The ChatLog was thrown in last and we didn't have time to complete it.  As you may have noticed there is
+                        The ChatLog was thrown in last and we didn't have time to complete it.  As you may have noticed, there is
                         no chat log in the app :).  We are still mounting our Messages collection there so we can easily build it out later.
-                        When a user chats it adds a new Message to the Messages collection and sends that data throught the socket with 
+                        The working part behaves as such: When a user chats, it adds a new Message to the Messages collection and sends that data through the socket with 
                         the username.  This way we know which user to place the chat bubble in the other clients apps.
                     </p>
                 </div>
@@ -225,7 +224,7 @@
                     <img src="media/styles/images/activenotes.png" alt="The Game Loop" />
                     <p>
                         We anticipated the main play loop to be one of the more challenging aspects of the project.  It had to be optimized since it would be responsible for playing collections of audio samples precisely enough to pass as music to sensitive human ears.  We began by looking to the internet for ideas for our implementation, and found <a href="http://nokarma.org/2011/02/02/javascript-game-development-the-game-loop/index.html">this article on Javascript Game Loops by Arthur Schreiber</a>.  While the article covers some bits of screen rendering, it served as a solid starting point.
-                        The basic necessities of our play loop were that it to loop through each step in the sequence at a consistent rate determined by a set beats per minute (BPM) value and play every active note in that step.  This was easily achieved with the following:
+                        The basic requirement of our play loop was that it had to loop through each step in the sequence at a consistent rate determined by a beats per minute (BPM) value and then play every active note in that step.  This was easily achieved with the following:
                     </p>
                     <p>
                         <pre><code>
@@ -250,7 +249,7 @@
             };
     })()
 
-    //Start the loop
+    // Start the loop
     Player.loopInterval = setInterval(Player.play, 0);
                         </code></pre>
                     </p>
@@ -288,7 +287,7 @@
     })();
                         </code></pre></p>
                         <p>
-                            This was as far as we got with the loop optimizations in the allotted 48 hours.  We would have liked to spend a bit more time tinkering with the loop, but it seems to be holding up with 4 to 5 users worth of notes.  By nature, sequencers are intimately bound with loops.  At the highest level, they contain the user-facing music loop, while further down they rely on precise "tick" timing loops.  Game loops were a relatively new topic to most of us.  We had fun learning about them and are excited to correct our mistakes in coming versions of the application.
+                            This was as far as we got with the loop optimizations in the allotted 48 hours.  We would have liked to spend a bit more time tinkering with the loop, but it is currently holding up with 4 to 5 users worth of notes.  By nature, sequencers are intimately bound with loops.  At the highest level, they contain the user-facing music loop, while further down they rely on precise "tick" timing loops.  Game loops were a relatively new topic to most of us.  We had fun learning about them and are excited to correct our mistakes in coming versions of the application.
                             </p>
 
                 </div>
